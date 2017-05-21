@@ -8,3 +8,6 @@ Project homepage (in Russian): http://lubyagin.ru/sqface/
 Licensed under the GNU Affero General Public License version 3 (AGPLv3), or at your option, any later version.
 
 ![](http://lubyagin.ru/sqface/lena-out-GOOD-many-stddev.jpg)
+
+Third-party files (rapidxml.hpp) licensed under: http://rapidxml.sourceforge.net/license.txt
+(Boost Software License or The MIT License, to be chosen freely by the user)
