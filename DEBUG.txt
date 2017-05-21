@@ -1,0 +1,16 @@
+
+$ ./build.sh 
+sqface.cpp:30:23: fatal error: FreeImage.h: Нет такого файла или каталога
+
+# apt-get install libfreeimage-dev
+
+$ ./build.sh 
+sqface.cpp: In member function ‘int TFaceRecognizer::Recognize(float)’:
+sqface.cpp:612:13: warning: variable ‘f_passed’ set but not used [-Wunused-but-set-variable]
+sqface.cpp: In function ‘int main(int, char**)’:
+sqface.cpp:719:22: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+
+/* Getting rid of annoying warnings */
+
+$ ./sqface lena.jpg out.debug.jpg
+

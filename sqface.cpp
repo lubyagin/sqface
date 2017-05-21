@@ -646,7 +646,7 @@ int TFaceRecognizer::Recognize(float factor) {
             break;
           }
         }
-        if (f_failed == 0) {
+        if ((f_failed == 0) && (f_passed == 1)) {
           printf("%d %d %d %d: [%f]\n", x1,y1,x2,y2, stddev);
           if (stddev > 25.0) {
             int x,y;
@@ -716,7 +716,7 @@ int main (int argc, char **argv) {
   if(argc > 3)
     filename_i_txt = argv[3];
   else
-    filename_i_txt = "haarcascade_frontalface_alt.xml";
+    filename_i_txt = const_cast<char*>("haarcascade_frontalface_alt.xml");
   TFaceRecognizer *Rec = new TFaceRecognizer();
   Rec->LoadImage(filename_i);
   Rec->LoadCascadeXML(filename_i_txt);
