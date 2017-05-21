@@ -592,7 +592,7 @@ int TFaceRecognizer::Recognize(float factor) {
   do {
     unsigned long long count_rect = 0;
     for(int k = 0; k < MAX_W; k++) a_ds[k] = (int)floor(k*dscale);
-    float sum_cascade = 0;
+//    float sum_cascade = 0;
     i++;
     window_w = (int)floor(cascade.window_w_mini*dscale);
     window_h = (int)floor(cascade.window_h_mini*dscale);
@@ -608,10 +608,11 @@ int TFaceRecognizer::Recognize(float factor) {
         float variance = f_sum2(x1,y1,window_w,window_h)*inv - sqr(mean);
         float stddev = 1.0;
         if (variance > 0.0) stddev = sqrt(variance);
-        if(stddev < 10.0) continue;
+//        if(stddev < 10.0) continue;
         // обработка "скользящего окна"
         int f_failed = 0; // хотя бы один этап "провалил"
         int f_passed = 0; // хотя бы один этап "прошел"
+        float sum_cascade = 0;
         for (int i_stage = 0; i_stage < cascade.n_stages; i_stage++) {
           float sum_stage = 0.0;
           for (int i_feature_abs = this->stages[i_stage].i_feature_abs_1;
@@ -639,7 +640,7 @@ int TFaceRecognizer::Recognize(float factor) {
 
             if (sum_stage > this->stages[i_stage].stage_threshold) {
               f_passed = 1;
-              //break;
+              break;
             }
           } // features
           sum_cascade += (float)sum_stage;
@@ -650,7 +651,7 @@ int TFaceRecognizer::Recognize(float factor) {
         }
         if ((f_failed == 0) && (f_passed == 1)) {
           printf("%d %d %d %d: [%f] %f\n", x1,y1,x2,y2, stddev, sum_cascade);
-          if (stddev > 25.0) {
+//          if (stddev > 25.0) {
             int x,y;
             y = y1; for(x = x1; x <= x2; x++) {
               p0[stride0*(h0-y)+bypp0*x+0] = 0xFF;
@@ -673,7 +674,7 @@ int TFaceRecognizer::Recognize(float factor) {
               p0[stride0*(h0-y)+bypp0*x+2] = 0x3F;
             }
             i_face++;
-          }
+ //         }
         }
         count_rect += cascade.n_rects;
         count_window++;
