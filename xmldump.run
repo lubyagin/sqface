@@ -1,0 +1,16 @@
+#!/bin/bash
+
+find xml/ -type f -name "*.xml" -exec sh -c '\
+FROM={}
+echo $FROM
+DIR=`dirname {}`
+DEST=`basename {} .xml`.dump
+echo $DIR/$DEST
+./xmldump.py $FROM > $DIR/$DEST
+' \;
+
+# libxml2-utils
+# xmllint
+# haarcascade_smile.xml:46: parser error : Double hyphen within comment: <!---
+# See http://stackoverflow.com/questions/10842131/xml-comments-and
+
