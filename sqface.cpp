@@ -1,5 +1,7 @@
 /*
     sqface - реализация алгоритма распознавания по методу Виолы-Джонса
+    Viola-Jones implementation in C
+
     Автор: Александр Лубягин, lubyagin@yandex.ru
     Дата публикации: 6 декабря 2011 года
     Опубликовано на сайте SQFACE.RU под лицензией AGPLv3
@@ -647,7 +649,7 @@ int TFaceRecognizer::Recognize(float factor) {
           }
         }
         if ((f_failed == 0) && (f_passed == 1)) {
-          printf("%d %d %d %d: [%f]\n", x1,y1,x2,y2, stddev);
+          printf("%d %d %d %d: [%f] %f\n", x1,y1,x2,y2, stddev, sum_cascade);
           if (stddev > 25.0) {
             int x,y;
             y = y1; for(x = x1; x <= x2; x++) {
@@ -716,7 +718,7 @@ int main (int argc, char **argv) {
   if(argc > 3)
     filename_i_txt = argv[3];
   else
-    filename_i_txt = const_cast<char*>("haarcascade_frontalface_alt.xml");
+    filename_i_txt = const_cast<char*>("xml/haarcascade_frontalface_alt.xml");
   TFaceRecognizer *Rec = new TFaceRecognizer();
   Rec->LoadImage(filename_i);
   Rec->LoadCascadeXML(filename_i_txt);
