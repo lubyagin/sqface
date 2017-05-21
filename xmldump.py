@@ -8,6 +8,7 @@ from re import compile,sub
 SEP = ":"
 ENC = "UTF-8"
 r = compile("---+")
+TagsOnly = False
 
 class CXmlParser:
   def __init__(self):
@@ -21,8 +22,12 @@ class CXmlParser:
   def EndElement(self,name):
     #print name
     path = SEP.join(self.names)
-    print path,self.data.strip()
+    if TagsOnly:
+      print path
+    else:
+      print path,self.data.strip()
     del self.names[-1]
+    self.data = ""
 
   def CharacterData(self,data):
     #print data

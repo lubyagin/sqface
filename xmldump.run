@@ -14,3 +14,11 @@ echo $DIR/$DEST
 # haarcascade_smile.xml:46: parser error : Double hyphen within comment: <!---
 # See http://stackoverflow.com/questions/10842131/xml-comments-and
 
+find xml/ -type f -name "*.xml" -exec sh -c '\
+FROM={}
+echo $FROM
+DIR=`dirname {}`
+DEST=`basename {} .xml`.tags
+echo $DIR/$DEST
+./xmltags.py $FROM | sort -b | uniq -c | sort -k1rg > $DIR/$DEST
+' \;
